@@ -227,7 +227,7 @@ macro_rules! get_addr {
 
 	($module:literal $($tt:tt)*) => {
 		$crate::_get_addr0!(
-			(crate::__getfn_winapi__::um::libloaderapi::GetModuleHandleA(concat!($module, "\0").as_ptr() as _))
+			(crate::__getfn_winapi__::um::libloaderapi::GetModuleHandleA(concat!($module, "\0").as_ptr() as _).cast::<()>())
 			$($tt)*
 		)
 	};
@@ -236,42 +236,40 @@ macro_rules! get_addr {
 #[doc(hidden)]
 #[macro_export]
 macro_rules! _get_addr0 {
-	(($v:expr)) => ({
-		#[allow(unused_unsafe)] unsafe { ::core::mem::transmute::<_, *mut ()>($v) }
-	});
+	(($v:expr)) => ($v);
 	(($v:expr) @ $sym:literal $($tt:tt)*) => {
 		$crate::_get_addr0!(
-			(crate::__getfn_winapi__::um::libloaderapi::GetProcAddress(::core::mem::transmute($v), concat!($sym, "\0").as_ptr() as _))
+			(::core::mem::transmute::<_, *mut ()>(crate::__getfn_winapi__::um::libloaderapi::GetProcAddress($v as *mut _, concat!($sym, "\0").as_ptr() as _)))
 			$($tt)*
 		)
 	};
 	(($v:expr) * $($tt:tt)*) => {
 		$crate::_get_addr0!(
-			(*::core::mem::transmute::<_, *mut usize>($v))
+			(($v as *mut *mut ()).read())
 			$($tt)*
 		)
 	};
 	(($v:expr) + $e:literal $($tt:tt)*) => {
 		$crate::_get_addr0!(
-			(::core::mem::transmute::<_, usize>($v) + ($e as usize))
+			($v.cast::<u8>().offset($e as isize).cast::<()>())
 			$($tt)*
 		)
 	};
 	(($v:expr) + ($e:expr) $($tt:tt)*) => {
 		$crate::_get_addr0!(
-			(::core::mem::transmute::<_, usize>($v) + ($e as usize))
+			($v.cast::<u8>().offset($e as isize).cast::<()>())
 			$($tt)*
 		)
 	};
 	(($v:expr) - $e:literal $($tt:tt)*) => {
 		$crate::_get_addr0!(
-			(::core::mem::transmute::<_, usize>($v) - ($e as usize))
+			($v.cast::<u8>().offset(-($e as isize)).cast::<()>())
 			$($tt)*
 		)
 	};
 	(($v:expr) - ($e:expr) $($tt:tt)*) => {
 		$crate::_get_addr0!(
-			(::core::mem::transmute::<_, usize>($v) - ($e as usize))
+			($v.cast::<u8>().offset(-($e as isize)).cast::<()>())
 			$($tt)*
 		)
 	}
