@@ -1,3 +1,5 @@
+#![no_std]
+
 pub use paste;
 
 #[macro_export]
@@ -232,7 +234,7 @@ macro_rules! symbol_fn {
 		$($tta:tt)*
 	) => {
 		$crate::getfn! {
-			(#[allow(unused_unsafe)] unsafe { ::std::mem::transmute($crate::get_addr!($($tt)*)) }) $vis $(extern $cc)? fn $name($($arg : $argtype),*) $(-> $ret)?;
+			(#[allow(unused_unsafe)] unsafe { ::core::mem::transmute($crate::get_addr!($($tt)*)) }) $vis $(extern $cc)? fn $name($($arg : $argtype),*) $(-> $ret)?;
 		}
 
 		$crate::symbol_fn!($($tta)*);
@@ -242,7 +244,7 @@ macro_rules! symbol_fn {
 		$($tta:tt)*
 	) => {
 		$crate::getfn! {
-			(#[allow(unused_unsafe)] unsafe { ::std::mem::transmute($crate::get_addr!($($tt)*)) }) $vis unsafe $(extern $cc)? fn $name($($arg : $argtype),*) $(-> $ret)?;
+			(#[allow(unused_unsafe)] unsafe { ::core::mem::transmute($crate::get_addr!($($tt)*)) }) $vis unsafe $(extern $cc)? fn $name($($arg : $argtype),*) $(-> $ret)?;
 		}
 
 		$crate::symbol_fn!($($tta)*);
@@ -252,7 +254,7 @@ macro_rules! symbol_fn {
 		$($tta:tt)*
 	) => {
 		$crate::getfn! {
-			(#[allow(unused_unsafe)] unsafe { ::std::mem::transmute($crate::get_addr!($($tt)*)) }) $vis $(extern $cc)? fn Self::$name($($arg : $argtype),*) $(-> $ret)?;
+			(#[allow(unused_unsafe)] unsafe { ::core::mem::transmute($crate::get_addr!($($tt)*)) }) $vis $(extern $cc)? fn Self::$name($($arg : $argtype),*) $(-> $ret)?;
 		}
 
 		$crate::symbol_fn!($($tta)*);
@@ -262,7 +264,7 @@ macro_rules! symbol_fn {
 		$($tta:tt)*
 	) => {
 		$crate::getfn! {
-			(#[allow(unused_unsafe)] unsafe { ::std::mem::transmute($crate::get_addr!($($tt)*)) }) $vis unsafe $(extern $cc)? fn Self::$name($($arg : $argtype),*) $(-> $ret)?;
+			(#[allow(unused_unsafe)] unsafe { ::core::mem::transmute($crate::get_addr!($($tt)*)) }) $vis unsafe $(extern $cc)? fn Self::$name($($arg : $argtype),*) $(-> $ret)?;
 		}
 
 		$crate::symbol_fn!($($tta)*);
@@ -272,7 +274,7 @@ macro_rules! symbol_fn {
 		$($tta:tt)*
 	) => {
 		$crate::getfn! {
-			(#[allow(unused_unsafe)] unsafe { ::std::mem::transmute($crate::get_addr!($($tt)*)) }) $vis $(extern $cc)? fn Self::$name([$($self)+] $($arg : $argtype),*) $(-> $ret)?;
+			(#[allow(unused_unsafe)] unsafe { ::core::mem::transmute($crate::get_addr!($($tt)*)) }) $vis $(extern $cc)? fn Self::$name([$($self)+] $($arg : $argtype),*) $(-> $ret)?;
 		}
 
 		$crate::symbol_fn!($($tta)*);
@@ -282,7 +284,7 @@ macro_rules! symbol_fn {
 		$($tta:tt)*
 	) => {
 		$crate::getfn! {
-			(#[allow(unused_unsafe)] unsafe { ::std::mem::transmute($crate::get_addr!($($tt)*)) }) $vis unsafe $(extern $cc)? fn Self::$name([$($self)+] $($arg : $argtype),*) $(-> $ret)?;
+			(#[allow(unused_unsafe)] unsafe { ::core::mem::transmute($crate::get_addr!($($tt)*)) }) $vis unsafe $(extern $cc)? fn Self::$name([$($self)+] $($arg : $argtype),*) $(-> $ret)?;
 		}
 
 		$crate::symbol_fn!($($tta)*);
