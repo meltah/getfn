@@ -1,0 +1,14 @@
+[package]
+edition = "2018"
+name = "getfn"
+version = "0.1.2"
+authors = ["Mazin Eltahawy <mazintahawy@gmail.com>"]
+license = "MIT OR Apache-2.0"
+
+description = "A utility crate for generating function pairs to refer to functions via custom expressions."
+documentation = "https://docs.rs/getfn"
+
+repository = "https://github.com/meltah/getfn"
+
+[dependencies]
+paste = "1"
