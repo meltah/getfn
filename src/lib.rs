@@ -281,7 +281,7 @@ macro_rules! _get_addr0 {
 macro_rules! symbol_fn {
 	() => {};
 	(
-		($($tt:tt)*) $vis:vis $(extern $cc:literal)? fn $name:ident($($arg:ident : $argtype:ty),*) $(-> $ret:ty)?;
+		($($tt:tt)*) $vis:vis $(extern $cc:literal)? fn $name:ident($($arg:ident : $argtype:ty),* $(,)?) $(-> $ret:ty)?;
 		$($tta:tt)*
 	) => {
 		$crate::getfn! {
@@ -291,7 +291,7 @@ macro_rules! symbol_fn {
 		$crate::symbol_fn!($($tta)*);
 	};
 	(
-		($($tt:tt)*) $vis:vis unsafe $(extern $cc:literal)? fn $name:ident($($arg:ident : $argtype:ty),*) $(-> $ret:ty)?;
+		($($tt:tt)*) $vis:vis unsafe $(extern $cc:literal)? fn $name:ident($($arg:ident : $argtype:ty),* $(,)?) $(-> $ret:ty)?;
 		$($tta:tt)*
 	) => {
 		$crate::getfn! {
@@ -301,7 +301,7 @@ macro_rules! symbol_fn {
 		$crate::symbol_fn!($($tta)*);
 	};
 	(
-		($($tt:tt)*) $vis:vis $(extern $cc:literal)? fn Self::$name:ident($($arg:ident : $argtype:ty),*) $(-> $ret:ty)?;
+		($($tt:tt)*) $vis:vis $(extern $cc:literal)? fn Self::$name:ident($($arg:ident : $argtype:ty),* $(,)?) $(-> $ret:ty)?;
 		$($tta:tt)*
 	) => {
 		$crate::getfn! {
@@ -311,7 +311,7 @@ macro_rules! symbol_fn {
 		$crate::symbol_fn!($($tta)*);
 	};
 	(
-		($($tt:tt)*) $vis:vis unsafe $(extern $cc:literal)? fn Self::$name:ident($($arg:ident : $argtype:ty),*) $(-> $ret:ty)?;
+		($($tt:tt)*) $vis:vis unsafe $(extern $cc:literal)? fn Self::$name:ident($($arg:ident : $argtype:ty),* $(,)?) $(-> $ret:ty)?;
 		$($tta:tt)*
 	) => {
 		$crate::getfn! {
@@ -321,7 +321,7 @@ macro_rules! symbol_fn {
 		$crate::symbol_fn!($($tta)*);
 	};
 	(
-		($($tt:tt)*) $vis:vis $(extern $cc:literal)? fn Self::$name:ident([$($self:tt)+] $($arg:ident : $argtype:ty),*) $(-> $ret:ty)?;
+		($($tt:tt)*) $vis:vis $(extern $cc:literal)? fn Self::$name:ident([$($self:tt)+] $($arg:ident : $argtype:ty),* $(,)?) $(-> $ret:ty)?;
 		$($tta:tt)*
 	) => {
 		$crate::getfn! {
@@ -331,7 +331,7 @@ macro_rules! symbol_fn {
 		$crate::symbol_fn!($($tta)*);
 	};
 	(
-		($($tt:tt)*) $vis:vis unsafe $(extern $cc:literal)? fn Self::$name:ident([$($self:tt)+] $($arg:ident : $argtype:ty),*) $(-> $ret:ty)?;
+		($($tt:tt)*) $vis:vis unsafe $(extern $cc:literal)? fn Self::$name:ident([$($self:tt)+] $($arg:ident : $argtype:ty),* $(,)?) $(-> $ret:ty)?;
 		$($tta:tt)*
 	) => {
 		$crate::getfn! {
