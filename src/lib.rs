@@ -299,7 +299,7 @@ macro_rules! symbol_static {
 		$crate::symbol_static!($($tta)*);
 	};
 	(($($tt:tt)*) $vis:vis static mut $name:ident: $ty:ty; $($tta:tt)*) => {
-		compile_error!("static muts are almost never needed. consider using atomics or `static X: UnsafeCell<T>` if you really need to.");
+		::core::compile_error!("static muts are unsupported. consider using atomics or `static X: UnsafeCell<T>`.");
 	}
 }
 
